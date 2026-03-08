@@ -1,0 +1,35 @@
+# config/copy_target.yaml
+
+model:
+  path: "/root/trainbin1/nomask160m800"
+  alias: "Pythia-160mlocal"
+
+data:
+  npy_path: "/root/indicies0-999.npy"
+  num_train_samples: 8192
+  seq_length: 2048
+  batch_size_ekfac: 4
+  batch_size_influence: 1
+  num_workers: 2
+
+target:
+  layer: 5
+  head: 10
+  mode: "qkvo"
+
+ekfac:
+  damping: 1e-5
+  damping_alpha: 0.1
+
+probe:
+  type: "copy_target_synthetic"
+  num_samples: 32
+  induction_match: "current"
+  match_choice: "last"
+
+dtype: "bfloat16"
+
+output:
+  dir: "/root/160m800/influence_copytarget_qkvo"
+  top_k: 1536
+
